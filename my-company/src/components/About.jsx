@@ -1,3 +1,4 @@
+// src/components/About.jsx
 function About() {
     return (
         <div style={{ padding: '20px' }}>
