@@ -1,24 +1,17 @@
-// App.jsx
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import RecipeList from './RecipeList';
-import AddRecipeForm from './AddRecipeForm';
-import RecipeDetails from './RecipeDetails';
+import './App.css'
+import RecipeList from './components/RecipeList'
+import { AddRecipeForm } from './components/AddRecipeForm'
 
-import './App.css';
 
 function App() {
+
+
   return (
-    <Router>
-      <div>
-        <h1>Recipe App</h1>
-        <AddRecipeForm />
-        <Routes>
-          <Route path="/" element={<RecipeList />} />
-          <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+    <div>
+      <RecipeList />
+      <AddRecipeForm />
+    </div>
+  )
 }
 
-export default App;
+export default App
