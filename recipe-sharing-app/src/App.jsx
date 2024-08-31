@@ -1,5 +1,6 @@
 // App.jsx
 import './App.css';
+import SearchBar from './components/SearchBar';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeDetails from './components/RecipeDetails';
@@ -11,6 +12,7 @@ function App() {
   return (
     <Router>
       <div>
+        <SearchBar />
         <Routes>
           <Route path="/" element={<RecipeList />} />
           <Route path="/add" element={<AddRecipeForm />} />
