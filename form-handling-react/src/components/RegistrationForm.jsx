@@ -5,23 +5,23 @@ const RegistrationForm = () => {
     const [username, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const [error, setErrors] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!username) {
             alert('All Fields are required')
-            setError('All Fields are required')
+            setErrors('All Fields are required')
             return;
         }
         if (!email) {
             alert('All Fields are required')
-            setError('All Fields are required')
+            setErrors('All Fields are required')
             return;
         }
         if (!password) {
             alert('All Fields are required')
-            setError('All Fields are required')
+            setErrors('All Fields are required')
             return;
         }
         console.log('Form data sent', formData)
