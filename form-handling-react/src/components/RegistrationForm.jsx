@@ -2,17 +2,13 @@ import { useState } from "react";
 
 
 const RegistrationForm = () => {
-    const [formData, setFormData] = useState(
-        {
-            username: '',
-            email: '',
-            password: ''
-        }
-    )
+    const [username, setUserName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!formData.username || !formData.email || !formData.password) {
+        if (!username || !email || !password) {
             alert('All Fields are required')
             return;
         }
@@ -22,7 +18,9 @@ const RegistrationForm = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }))
+        setUserName((prev) => ({ ...prev, [name]: value }))
+        setEmail((prev) => ({ ...prev, [name]: value }))
+        setPassword((prev) => ({ ...prev, [name]: value }))
     };
 
     return (
@@ -32,7 +30,7 @@ const RegistrationForm = () => {
                 <input
                     type="text"
                     name="username"
-                    value={formData.username}
+                    value={username}
                     onChange={handleChange}
                     placeholder="Enter your username"
                 />
@@ -42,7 +40,7 @@ const RegistrationForm = () => {
                 <input
                     type="email"
                     name="email"
-                    value={formData.email}
+                    value={email}
                     onChange={handleChange}
                     placeholder="Enter your Email Address"
                 />
@@ -52,7 +50,7 @@ const RegistrationForm = () => {
                 <input
                     type="password"
                     name="password"
-                    value={formData.password}
+                    value={password}
                     onChange={handleChange}
                     placeholder="Enter your Password"
                 />
