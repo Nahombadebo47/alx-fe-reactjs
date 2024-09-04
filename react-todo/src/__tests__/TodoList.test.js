@@ -28,17 +28,18 @@ describe('TodoList Component', () => {
         });
         fireEvent.click(screen.getByText('Add Todo'));
 
-        // Toggle the completion status
-        fireEvent.click(screen.getByText('Learn Testing'));
-        expect(screen.getByText('Learn Testing')).toHaveStyle(
-            'text-decoration: line-through'
-        );
+        // Find the todo item element
+        const todoItem = screen.getByText('Learn Testing');
+
+        // Toggle the completion status to complete
+        fireEvent.click(todoItem);
+
+        // Ensure the list item parent has the correct style applied
+        expect(todoItem.closest('li')).toHaveStyle('text-decoration: line-through');
 
         // Toggle back to incomplete
-        fireEvent.click(screen.getByText('Learn Testing'));
-        expect(screen.getByText('Learn Testing')).toHaveStyle(
-            'text-decoration: none'
-        );
+        fireEvent.click(todoItem);
+        expect(todoItem.closest('li')).toHaveStyle('text-decoration: none');
     });
 
     test('deletes a todo item', () => {

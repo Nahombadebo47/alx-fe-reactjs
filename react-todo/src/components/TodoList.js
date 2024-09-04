@@ -2,18 +2,16 @@
 import React, { useState } from 'react';
 
 const TodoList = () => {
-    const [todos, setTodos] = useState([]); // State to hold the list of todos
-    const [inputValue, setInputValue] = useState(''); // State to manage input value
+    const [todos, setTodos] = useState([]);
+    const [inputValue, setInputValue] = useState('');
 
-    // Function to handle adding a new todo
     const addTodo = () => {
-        if (inputValue.trim() === '') return; // Prevent adding empty todos
+        if (inputValue.trim() === '') return;
         const newTodo = { id: Date.now(), text: inputValue, completed: false };
         setTodos([...todos, newTodo]);
-        setInputValue(''); // Clear input after adding
+        setInputValue('');
     };
 
-    // Function to toggle the completion status of a todo
     const toggleTodo = (id) => {
         setTodos(
             todos.map((todo) =>
@@ -22,7 +20,6 @@ const TodoList = () => {
         );
     };
 
-    // Function to delete a todo
     const deleteTodo = (id) => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
@@ -39,7 +36,10 @@ const TodoList = () => {
             <button onClick={addTodo}>Add Todo</button>
             <ul>
                 {todos.map((todo) => (
-                    <li key={todo.id} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+                    <li
+                        key={todo.id}
+                        style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+                    >
                         <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
                         <button onClick={() => deleteTodo(todo.id)}>Delete</button>
                     </li>
