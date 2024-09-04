@@ -7,6 +7,7 @@ import Profile from './components/Profile';
 import ProfileDetails from './components/ProfileDetails';
 import ProfileSettings from './components/ProfileSettings';
 import ProtectedRoute from './components/ProtectedRoute';
+import BlogPost from './components/BlogPost'; // Import the BlogPost component
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Simulate auth state
@@ -16,7 +17,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        {/* Use the ProtectedRoute to guard the Profile route */}
         <Route
           path="/profile"
           element={
@@ -28,6 +28,8 @@ function App() {
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
+        {/* Dynamic Route for BlogPost */}
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
   );
