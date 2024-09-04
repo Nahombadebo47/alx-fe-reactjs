@@ -28,8 +28,9 @@ describe('TodoList Component', () => {
         });
         fireEvent.click(screen.getByText('Add Todo'));
 
-        // Find the todo item element
-        const todoItem = screen.getByText('Learn Testing');
+        // Find all instances of "Learn Testing" and select the last one (newly added)
+        const todoItems = screen.getAllByText('Learn Testing');
+        const todoItem = todoItems[todoItems.length - 1]; // Select the newly added item
 
         // Toggle the completion status to complete
         fireEvent.click(todoItem);
@@ -49,8 +50,11 @@ describe('TodoList Component', () => {
         });
         fireEvent.click(screen.getByText('Add Todo'));
 
-        // Delete the todo item
-        fireEvent.click(screen.getByText('Delete'));
+        // Find all delete buttons and select the last one (newly added todo's delete button)
+        const deleteButtons = screen.getAllByText('Delete');
+        fireEvent.click(deleteButtons[deleteButtons.length - 1]);
+
+        // Ensure the todo is deleted
         expect(screen.queryByText('Delete this todo')).not.toBeInTheDocument();
     });
 });

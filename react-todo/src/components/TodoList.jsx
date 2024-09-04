@@ -1,8 +1,15 @@
 // src/components/TodoList.jsx
 import React, { useState } from 'react';
 
+// Initial todos for demonstration
+const initialTodos = [
+    { id: 1, text: 'Learn React', completed: false },
+    { id: 2, text: 'Learn Testing', completed: false },
+    { id: 3, text: 'Deploy App', completed: true },
+];
+
 const TodoList = () => {
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState(initialTodos);
     const [inputValue, setInputValue] = useState('');
 
     const addTodo = () => {
