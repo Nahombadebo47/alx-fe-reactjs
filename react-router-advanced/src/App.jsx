@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
@@ -10,8 +10,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import BlogPost from './components/BlogPost'; // Import the BlogPost component
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Simulate auth state
-
   return (
     <Router>
       <Routes>
@@ -20,7 +18,7 @@ function App() {
         <Route
           path="/profile"
           element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
