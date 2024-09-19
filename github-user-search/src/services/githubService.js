@@ -12,6 +12,7 @@ export const fetchUserData = async (username, location = '', minRepos = 0) => {
     query += `+repos:>=${minRepos}`;
   }
 
+  // Correct GitHub Search API URL
   const API_URL = `https://api.github.com/search/users?${query}`;
 
   try {
