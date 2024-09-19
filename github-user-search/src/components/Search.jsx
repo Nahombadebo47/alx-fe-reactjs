@@ -3,7 +3,7 @@ import { fetchUserData } from '../services/githubService';
 
 function Search() {
   const [username, setUsername] = useState('');
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);  // Store multiple users
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -11,12 +11,12 @@ function Search() {
     e.preventDefault();
     setLoading(true);
     setError('');
-    setUser(null);  // Clear the previous user data
+    setUsers([]);  // Clear previous users
     try {
       const userData = await fetchUserData(username);  // Fetch user data from GitHub API
-      setUser(userData);  // Set the user data in state
+      setUsers(userData);  // Set the list of users
     } catch (err) {
-      setError("Looks like we cant find the user");  // Set the exact error message
+      setError("Looks like we can't find the user");
     }
     setLoading(false);
   };
@@ -44,27 +44,36 @@ function Search() {
         {/* Error State */}
         {error && <p className="text-red-500">{error}</p>}
 
-        {/* User Display */}
-        {user && (
-          <div className="user-card bg-white shadow rounded p-5 mt-5 text-center">
-            {/* User Avatar */}
-            <img
-              src={user.avatar_url}
-              alt={user.login}
-              className="w-20 h-20 rounded-full mx-auto"
-            />
-            {/* User Login */}
-            <h2 className="text-xl font-bold mt-3">{user.login}</h2>
-            {/* Link to GitHub Profile */}
-            <a
-              href={user.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500"
-            >
-              View Profile
-            </a>
+        {/* Display multiple users */}
+        {users.length > 0 && (
+          <div className="user-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+            {users.map((user) => (
+              <div key={user.id} className="user-card bg-white shadow rounded p-5 text-center">
+                {/* User Avatar */}
+                <img
+                  src={user.avatar_url}
+                  alt={user.login}
+                  className="w-20 h-20 rounded-full mx-auto"
+                />
+                {/* User Login */}
+                <h2 className="text-xl font-bold mt-3">{user.login}</h2>
+                {/* Link to GitHub Profile */}
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500"
+                >
+                  View Profile
+                </a>
+              </div>
+            ))}
           </div>
+        )}
+
+        {/* No users found */}
+        {users.length === 0 && !loading && !error && (
+          <p className="text-gray-500">No users found. Try another search.</p>
         )}
       </div>
     </div>
