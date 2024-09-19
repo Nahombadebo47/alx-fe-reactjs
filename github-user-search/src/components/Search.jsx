@@ -3,6 +3,8 @@ import { fetchUserData } from '../services/githubService';
 
 function Search() {
   const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
   const [users, setUsers] = useState([]);  // Store multiple users
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -13,7 +15,7 @@ function Search() {
     setError('');
     setUsers([]);  // Clear previous users
     try {
-      const userData = await fetchUserData(username);  // Fetch user data from GitHub API
+      const userData = await fetchUserData(username, location, minRepos);  // Pass additional params
       setUsers(userData);  // Set the list of users
     } catch (err) {
       setError("Looks like we can't find the user");
@@ -24,7 +26,7 @@ function Search() {
   return (
     <div className="search-container">
       {/* Search Form */}
-      <form onSubmit={handleSubmit} className="flex justify-center mt-10">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center mt-10 space-y-4">
         <input
           type="text"
           value={username}
@@ -32,7 +34,21 @@ function Search() {
           placeholder="Enter GitHub username"
           className="border border-gray-400 p-2 rounded"
         />
-        <button type="submit" className="bg-blue-500 text-white p-2 ml-2 rounded">
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder="Enter location (optional)"
+          className="border border-gray-400 p-2 rounded"
+        />
+        <input
+          type="number"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          placeholder="Minimum repositories (optional)"
+          className="border border-gray-400 p-2 rounded"
+        />
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
           Search
         </button>
       </form>
