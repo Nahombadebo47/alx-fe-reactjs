@@ -16,7 +16,7 @@ function Search() {
       const userData = await fetchUserData(username);  // Fetch user data from GitHub API
       setUser(userData);  // Set the user data in state
     } catch (err) {
-      setError('Looks like we can’t find the user');  // Set the error message
+      setError("Looks like we can't find the user");  // Set the exact error message
     }
     setLoading(false);
   };
