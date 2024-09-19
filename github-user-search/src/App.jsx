@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Search from './components/Search';
-import { fetchUserData } from './services/githubService';
+import { fetchUserData } from './services/githubService';  // Import the service
 
 function App() {
   const [user, setUser] = useState(null);
@@ -11,7 +10,7 @@ function App() {
     setLoading(true);
     setError('');
     try {
-      const userData = await fetchUserData(username);
+      const userData = await fetchUserData(username);  // Call the service to fetch user data
       setUser(userData);
     } catch (err) {
       setError('Looks like we can’t find the user.');
@@ -21,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <Search onSearch={handleSearch} />
+      <Search onSearch={handleSearch} />  {/* Pass handleSearch to the search component */}
       <div className="container mx-auto mt-10">
         {loading && <p>Loading...</p>}
         {error && <p className="text-red-500">{error}</p>}

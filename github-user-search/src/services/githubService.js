@@ -1,17 +1,15 @@
-export const fetchAdvancedUserData = async ({ username, location, repoCount }) => {
-    const query = [];
-    if (username) query.push(`user:${username}`);
-    if (location) query.push(`location:${location}`);
-    if (repoCount) query.push(`repos:>${repoCount}`);
+import axios from 'axios';
+
+// Function to fetch user data from GitHub API
+export const fetchUserData = async (username) => {
+  const API_URL = `https://api.github.com/users/${username}`;
   
-    const searchQuery = query.join('+');
-    const API_URL = `https://api.github.com/search/users?q=${searchQuery}`;
-  
-    try {
-      const response = await axios.get(API_URL);
-      return response.data.items;
-    } catch (error) {
-      throw new Error('Unable to fetch user data');
-    }
-  };
-  
+  try {
+    // Make a GET request to the GitHub API
+    const response = await axios.get(API_URL);
+    return response.data;  // Return the user data
+  } catch (error) {
+    // Throw an error if the API call fails
+    throw new Error('Unable to fetch user data');
+  }
+};
