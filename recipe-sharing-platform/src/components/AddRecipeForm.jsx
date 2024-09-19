@@ -3,14 +3,14 @@ import { useState } from 'react';
 const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [steps, setSteps] = useState(''); // Renamed from instructions to steps
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validate form fields
-    if (!title || !ingredients || !instructions) {
+    if (!title || !ingredients || !steps) {
       setErrorMessage('All fields are required.');
       return;
     }
@@ -19,7 +19,7 @@ const AddRecipeForm = () => {
     const newRecipe = {
       title,
       ingredients: ingredients.split(','),
-      instructions: instructions.split('.'),
+      steps: steps.split('.'), // Renamed from instructions to steps
     };
 
     console.log('New Recipe Submitted: ', newRecipe);
@@ -27,7 +27,7 @@ const AddRecipeForm = () => {
     // Reset form
     setTitle('');
     setIngredients('');
-    setInstructions('');
+    setSteps(''); // Renamed from instructions to steps
     setErrorMessage('');
   };
 
@@ -67,14 +67,14 @@ const AddRecipeForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="instructions">
-            Instructions (period-separated)
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="steps">
+            Steps (period-separated)
           </label>
           <textarea
-            id="instructions"
+            id="steps"
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)} // Renamed from instructions to steps
             rows="4"
           />
         </div>
